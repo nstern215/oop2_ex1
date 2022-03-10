@@ -3,4 +3,5 @@
                                   "Intersection.cpp"
                                   "Difference.cpp"
                                   "BaseFunction.cpp"
-                                  "Group.cpp")
+                                  "Group.cpp"
+                                  "FunctionNode.cpp")
