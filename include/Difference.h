@@ -4,6 +4,6 @@
 class Difference : public BaseFunction
 {
 public:
+	Difference() = default;
 	Group eval(Group a, Group b) override;
-	std::ostream& operator<<(std::ostream& os, const BaseFunction& other) override;
 };

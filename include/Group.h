@@ -5,10 +5,12 @@ class Group
 {
 public:
 	Group(int size);
+	Group(std::vector<int>& data);
 
-	std::vector<int> getData() const;
+	std::vector<int>* getData() const;
 private:
 	void readData(int size);
-	
-	std::vector<int> m_data;
+	void order() const;
+
+	std::unique_ptr<std::vector<int>> m_pdata;
 };
