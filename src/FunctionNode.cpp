@@ -9,9 +9,7 @@ FunctionNode::FunctionNode(BaseFunction* function, std::shared_ptr<FunctionNode>
 
 
 FunctionNode::~FunctionNode()
-{
-	delete m_function;
-}
+{}
 
 BaseFunction* FunctionNode::getFunction() const
 {
@@ -20,7 +18,7 @@ BaseFunction* FunctionNode::getFunction() const
 
 std::ostream& operator<<(std::ostream& os, const FunctionNode& other)
 {
-	//os << *(other.getFunction());
-	os << "Function";
+	other.getFunction()->print(os);
+	//os << "Function";
 	return os;
 }

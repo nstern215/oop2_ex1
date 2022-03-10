@@ -15,3 +15,5 @@ private:
 	std::shared_ptr<FunctionNode> m_left;
 	std::shared_ptr<FunctionNode> m_right;
 };
+
+std::ostream& operator<<(std::ostream& os, const FunctionNode& other);
