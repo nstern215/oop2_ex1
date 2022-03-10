@@ -5,6 +5,5 @@ class Union : public BaseFunction
 {
 public:
 	Union() = default;
-	Group eval(Group a, Group b) override;
-	
+	std::unique_ptr<Group> eval(Group a, Group b) override;
 };

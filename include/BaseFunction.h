@@ -9,6 +9,5 @@ public:
 	BaseFunction() = default;
 	virtual ~BaseFunction() = default;
 	
-	virtual Group eval(Group a, Group b) = 0;
-	//virtual std::ostream& operator<<(std::ostream& os, const BaseFunction& other) = 0;
+	virtual std::unique_ptr<Group> eval(Group a, Group b) = 0;
 };

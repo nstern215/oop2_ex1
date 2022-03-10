@@ -5,5 +5,5 @@ class Intersection : public BaseFunction
 {
 public:
 	Intersection() = default;
-	Group eval(Group a, Group b) override;
+	std::unique_ptr<Group> eval(Group a, Group b) override;
 };

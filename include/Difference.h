@@ -5,5 +5,5 @@ class Difference : public BaseFunction
 {
 public:
 	Difference() = default;
-	Group eval(Group a, Group b) override;
+	std::unique_ptr<Group> eval(Group a, Group b) override;
 };
