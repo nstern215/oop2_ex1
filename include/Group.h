@@ -12,5 +12,5 @@ private:
 	void readData(int size);
 	void order() const;
 
-	std::unique_ptr<std::vector<int>> m_pdata;
+	std::unique_ptr<std::vector<int>> m_data;
 };

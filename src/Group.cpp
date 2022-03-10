@@ -5,17 +5,17 @@
 #include "Group.h"
 
 Group::Group(int size):
-	m_pdata(std::make_unique<std::vector<int>>())
+	m_data(std::make_unique<std::vector<int>>())
 {
 	readData(size);
 }
 
 //todo use pointer for the vector
 Group::Group(std::vector<int>& data):
-	m_pdata(std::make_unique<std::vector<int>>())
+	m_data(std::make_unique<std::vector<int>>())
 {
 	for (const auto i : data)
-		m_pdata->push_back(i);
+		m_data->push_back(i);
 	
 	order();
 }
@@ -27,7 +27,7 @@ void Group::readData(int size)
 	for (int i = 0; i < size; ++i)
 	{
 		std::cin >> num;
-		m_pdata->push_back(num);
+		m_data->push_back(num);
 	}
 
 	order();
@@ -35,14 +35,14 @@ void Group::readData(int size)
 
 std::vector<int>* Group::getData() const
 {
-	return m_pdata.get();
+	return m_data.get();
 }
 
 void Group::order() const
 {
-	std::ranges::sort(*m_pdata);
-	auto [newEnd, end] = std::ranges::unique(*m_pdata);
-	m_pdata->erase(newEnd, end);
+	std::ranges::sort(*m_data);
+	auto [newEnd, end] = std::ranges::unique(*m_data);
+	m_data->erase(newEnd, end);
 }
 
 std::ostream& operator<<(std::ostream& os, const Group& other)
