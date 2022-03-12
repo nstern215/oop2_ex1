@@ -35,6 +35,8 @@ int main()
 	const auto intersectionFunc = std::make_unique<Intersection>();
 	const auto differenceFunc = std::make_unique<Difference>();
 	
+	int right, left;
+
 	std::vector<std::shared_ptr<FunctionNode>> operations = {
 		std::make_shared<FunctionNode>(unionFunc.get()),
 		std::make_shared<FunctionNode>(intersectionFunc.get()),
@@ -47,10 +49,20 @@ int main()
 	{
 		cout << "List of available set of operations:\n" << endl;
 
-		for (int i = 0; i < operations.size(); ++i)
-			cout << i << ".\t" << *(operations[i].get())<< endl;
+		for (int i = 0; i < operations.size(); ++i) 
+		{
+			char groupName = 65;
 
-		cout << "\n";
+			cout << i << ".\t";
+
+			operations[i]->printFunction(operations[i],groupName);
+
+			//cout << i << ".\t" << groupName << " " << *(operations[i].get());
+			//groupName ++;
+			//cout << " " << groupName << endl;
+
+			cout << "\n";
+		}
 
 		cout << "Enter command ('help' for the list of available commands): ";
 
@@ -59,8 +71,33 @@ int main()
 		if (command == "exit")
 			break;
 
-		if (command == "help")
+		else if (command == "help")
 			cout << help << endl;
+	
+		else if (command == "uni")
+		{
+			cin >> left >> right;
+			operations.push_back(std::make_shared<FunctionNode>(unionFunc.get(), operations[left], operations[right]));
+		}
+
+		else if (command == "inter")
+		{
+			cin >> left >> right;
+			operations.push_back(std::make_shared<FunctionNode>(intersectionFunc.get(), operations[left], operations[right]));
+		}
+
+		else if (command == "diff")
+		{
+			cin >> left >> right;
+			operations.push_back(std::make_shared<FunctionNode>(differenceFunc.get(), operations[left], operations[right]));
+		}
+
+		else if (command == "del")
+		{
+			cin >> left;
+			operations.erase(operations.begin()+left);
+		}
+	
 	}	
 	
 	return EXIT_SUCCESS;
