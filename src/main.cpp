@@ -42,6 +42,7 @@ int main()
 	};
 
 	string command;
+	int pos = 0;
 	
 	while (true)
 	{
@@ -56,6 +57,8 @@ int main()
 
 		cin >> command;
 
+		pos = command.find(" ");
+		
 		if (command == "exit")
 			break;
 
