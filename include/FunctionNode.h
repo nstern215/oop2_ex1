@@ -12,7 +12,8 @@ public:
 
 	BaseFunction* getFunction() const;
 	void getGroups();
-	void printFunction(std::shared_ptr<FunctionNode> thisFunction, char groupName)const;
+	//void printFunction(std::shared_ptr<FunctionNode> thisFunction, char groupName)const;
+	void printFunction(char groupName);
 	/*void evaluate(std::shared_ptr<FunctionNode> thisFunction, std::vector<Group> groupsList);*/
 
 private:

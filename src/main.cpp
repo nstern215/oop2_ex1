@@ -38,9 +38,9 @@ int main()
 	int right, left;
 
 	std::vector<std::shared_ptr<FunctionNode>> operations = {
-		std::make_shared<FunctionNode>(unionFunc.get()),
-		std::make_shared<FunctionNode>(intersectionFunc.get()),
-		std::make_shared<FunctionNode>(differenceFunc.get())
+		std::make_shared<FunctionNode>(unionFunc.get(), nullptr, nullptr),
+		std::make_shared<FunctionNode>(intersectionFunc.get(), nullptr, nullptr),
+		std::make_shared<FunctionNode>(differenceFunc.get(), nullptr, nullptr)
 	};
 
 	string command;
@@ -56,7 +56,7 @@ int main()
 
 			cout << i << ".\t";
 
-			operations[i]->printFunction(operations[i],groupName);
+			operations[i]->printFunction(groupName);
 
 			//cout << i << ".\t" << groupName << " " << *(operations[i].get());
 			//groupName ++;

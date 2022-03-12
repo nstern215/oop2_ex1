@@ -34,41 +34,42 @@ BaseFunction* FunctionNode::getFunction() const
 //	}
 //}
 
-void FunctionNode::printFunction(std::shared_ptr<FunctionNode> thisFunction, char groupName) const
+//void FunctionNode::printFunction(std::shared_ptr<FunctionNode> thisFunction, char groupName) const
+void FunctionNode::printFunction(char groupName)
 {
 	if (m_right == nullptr || m_left == nullptr) 
 	{
 		std::cout << groupName << " ";
-		std::cout << *thisFunction.get();
+		std::cout << *this;
 		groupName++;
 		std::cout << " " << groupName << std::endl;
 		groupName++;
 
-		thisFunction->m_numOfGroups += 2;
+		m_numOfGroups += 2;
 
 		return;
 	}
 
-	printFunction(thisFunction->m_left, groupName);
+	m_left->printFunction(groupName);
 	
-	printFunction(thisFunction->m_right, groupName);
-
-	return;
+	m_right->printFunction(groupName);
 }
 
-//void FunctionNode::evaluate(std::shared_ptr<FunctionNode> thisFunction, std::vector<Group> groupsList)
-//{
-//	if (m_right == nullptr || m_left == nullptr)
-//	{
-//	
-//	}
-//
-//	evaluate(thisFunction->m_left, groupsList);
-//
-//	evaluate(thisFunction->m_right, groupsList);
-//
-//	return;
-//}
+void FunctionNode::evaluate(std::shared_ptr<FunctionNode> thisFunction, std::vector<Group> groupsList)
+{
+	if (m_right == nullptr || m_left == nullptr)
+	{
+		return m_function->eval(groupsList[0], groupsList[1]);
+	}
+
+	auto resultLeft = evaluate(thisFunction->m_left, groupsList);
+
+	auto resultRight = evaluate(thisFunction->m_right, groupsList);
+
+	m_function->eval(resultLeft, resultRight)
+	
+	return;
+}
 
 std::ostream& operator<<(std::ostream& os, const FunctionNode& other)
 {
