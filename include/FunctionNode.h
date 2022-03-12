@@ -11,9 +11,9 @@ public:
 	~FunctionNode();
 
 	BaseFunction* getFunction() const;
-	void grtGroups();
+	void getGroups();
 	void printFunction(std::shared_ptr<FunctionNode> thisFunction, char groupName)const;
-	void evaluate(std::shared_ptr<FunctionNode> thisFunction, std::vector<Group> groupsList);
+	/*void evaluate(std::shared_ptr<FunctionNode> thisFunction, std::vector<Group> groupsList);*/
 
 private:
 	int m_numOfGroups;

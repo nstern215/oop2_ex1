@@ -19,20 +19,20 @@ BaseFunction* FunctionNode::getFunction() const
 	return m_function;
 }
 
-void FunctionNode::grtGroups()
-{
-	for (int i = 0; i < m_numOfGroups; i++)
-	{
-		int size;
-
-		std::cin >> size;
-		Group group(size);
-
-		group.getData();
-
-		this->m_groupsForEval.push_back(group);
-	}
-}
+//void FunctionNode::getGroups()
+//{
+//	for (int i = 0; i < m_numOfGroups; i++)
+//	{
+//		int size;
+//
+//		std::cin >> size;
+//		Group group(size);
+//
+//		group.getData();
+//
+//		this->m_groupsForEval.push_back(group);
+//	}
+//}
 
 void FunctionNode::printFunction(std::shared_ptr<FunctionNode> thisFunction, char groupName) const
 {
@@ -56,10 +56,19 @@ void FunctionNode::printFunction(std::shared_ptr<FunctionNode> thisFunction, cha
 	return;
 }
 
-void FunctionNode::evaluate(std::shared_ptr<FunctionNode> thisFunction, std::vector<Group> groupsList f )
-{
-
-}
+//void FunctionNode::evaluate(std::shared_ptr<FunctionNode> thisFunction, std::vector<Group> groupsList)
+//{
+//	if (m_right == nullptr || m_left == nullptr)
+//	{
+//	
+//	}
+//
+//	evaluate(thisFunction->m_left, groupsList);
+//
+//	evaluate(thisFunction->m_right, groupsList);
+//
+//	return;
+//}
 
 std::ostream& operator<<(std::ostream& os, const FunctionNode& other)
 {
