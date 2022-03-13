@@ -56,8 +56,6 @@ void FunctionNode::printFunction(char groupName)
 	std::cout << *this << " ";
 
 	m_right->printFunction(groupName);
-
-	m_function->eval(resultLeft, resultRight)
 	
 	return;
 }

@@ -68,8 +68,6 @@ int main()
 		cout << "Enter command ('help' for the list of available commands): ";
 
 		cin >> command;
-
-		pos = command.find(" ");
 		
 		if (command == "exit")
 			break;
