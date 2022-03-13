@@ -60,7 +60,8 @@ int main()
 
 			cout << i << ".\t";
 
-			operations[i]->printFunction(groupName);
+			//operations[i]->printFunction(groupName);
+			cout << *(operations[i]) << endl;
 
 			cout << "\n";
 		}
@@ -68,24 +69,34 @@ int main()
 		cout << "Enter command ('help' for the list of available commands): ";
 
 		cin >> command;
-
-		pos = command.find(" ");
 		
 		if (command == "exit")
 			break;
 
-		else if (command == "help")
+		if (command == "help")
 			cout << help << endl;
 
 		else if (command == "eval")
 		{
 			cin >> left;
 
+			const int numOfGroups = operations[left]->getRequiredGroups();
+			
 			std::vector<Group*> groups;
 
-			operations[left]->getGroups(groups);
+			for (int i = 0; i < numOfGroups; ++i)
+			{
+				int size;
+				cin >> size;
+				groups.push_back(new Group(size));
+			}
+			
 
-			operations[left]->evaluate(groups);
+			//operations[left]->getGroups(groups);
+
+			auto result = operations[left]->evaluate(groups);
+
+			cout << *(result.get()) << endl;
 
 		}
 	

@@ -4,7 +4,7 @@
 std::unique_ptr<Group> Difference::eval(Group* a, Group* b)
 {
 	std::vector<int> differenceData;
-	std::ranges::set_difference(a->getData()->begin(), a->getData()->end(), b->getData()->begin(), b->getData()->end(), differenceData.begin());
+	std::ranges::set_difference(a->getData()->begin(), a->getData()->end(), b->getData()->begin(), b->getData()->end(), std::back_inserter(differenceData));
 	
 	return std::make_unique<Group>(differenceData);
 }
@@ -17,6 +17,6 @@ std::ostream& Difference::print(std::ostream& os)
 
 std::ostream& operator<<(std::ostream& os, const Difference& other)
 {
-	os << "^";
+	os << "-";
 	return os;
 }
