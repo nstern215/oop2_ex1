@@ -1,4 +1,3 @@
-#include <iterator>
 #include <algorithm>
 #include <iostream>
 
@@ -56,7 +55,6 @@ std::ostream& operator<<(std::ostream& os, const Group& other)
 
 	const std::string fixedStr = dataStr.substr(0, dataStr.size() - 2);
 	
-	//std::ranges::copy(*(other.getData()), std::ostream_iterator<int>(os, ", "));
 	os << fixedStr << " }";
 	return os;
 }
