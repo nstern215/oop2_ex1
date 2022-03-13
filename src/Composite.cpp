@@ -2,10 +2,7 @@
 
 std::unique_ptr<Group> Composite::eval(Group* a, Group* b)
 {
-	std::vector<int> compositeData;
-	std::ranges::set_composite(a->getData()->begin(), a->getData()->end(), b->getData()->begin(), b->getData()->end(), intersectionData.begin());
-
-	return std::make_unique<Group>(compositeData);
+	return nullptr;
 }
 
 std::ostream& Composite::print(std::ostream& os)
@@ -14,7 +11,7 @@ std::ostream& Composite::print(std::ostream& os)
 	return os;
 }
 
-std::ostream& operator<<(std::ostream& os, const Intersection& other)
+std::ostream& operator<<(std::ostream& os, const Composite& other)
 {
 	os << "->";
 	return os;

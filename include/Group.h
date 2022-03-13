@@ -15,3 +15,4 @@ private:
 
 	std::unique_ptr<std::vector<int>> m_data;
 };
+std::ostream& operator<<(std::ostream& os, const Group& other);

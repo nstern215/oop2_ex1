@@ -10,4 +10,4 @@ public:
 	std::ostream& print(std::ostream& os);
 };
 
-std::ostream& operator<<(std::ostream& os, const Intersection& other);
+std::ostream& operator<<(std::ostream& os, const Composite& other);

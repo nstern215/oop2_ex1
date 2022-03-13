@@ -12,8 +12,9 @@ public:
 
 	BaseFunction* getFunction() const;
 	void getGroups(std::vector< Group*> groups);
-	void printFunction(char groupName);
-	std::unique_ptr<Group> evaluate(std::vector<Group*> groupsList);
+	int getRequiredGroups() const;
+	void printFunction(std::ostream& os, char groupName);
+	std::unique_ptr<Group> evaluate(std::vector<Group*>& groupsList);
 
 private:
 	int m_numOfGroups;
@@ -24,4 +25,4 @@ private:
 	std::shared_ptr<FunctionNode> m_right;
 };
 
-std::ostream& operator<<(std::ostream& os, const FunctionNode& other);
+std::ostream& operator<<(std::ostream& os, FunctionNode& other);

@@ -3,12 +3,13 @@
 
 std::unique_ptr<Group> Product::eval(Group* a, Group* b)
 {
-
 	std::vector<int> productData;
 
-	std::ranges::set_product(a->getData()->begin(), a->getData()->end(), b->getData()->begin(), b->getData()->end(), productData.begin());
+	for (const int i : *(a->getData()))
+		for (const int j : *(b->getData()))
+			productData.push_back(i * j);
 
-	return std::unique_ptr<Group>(productData);
+	return std::make_unique<Group>(productData);
 }
 
 std::ostream& Product::print(std::ostream& os)
