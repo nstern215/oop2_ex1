@@ -54,7 +54,7 @@ void FunctionNode::printFunction(std::ostream& os, char groupName)
 	os << "(";
 
 	if (m_left != nullptr)
-		os << " " << *m_left << " ";
+		os << " " << *m_left<< " ";
 
 	if (m_left == nullptr)
 		os << " A ";
@@ -92,16 +92,27 @@ void FunctionNode::printFunction(std::ostream& os, char groupName)
 
 std::unique_ptr<Group> FunctionNode::evaluate(std::vector<Group*>& groupsList)
 {
+	std::cout << "(";
+
 	if (m_right.get() == nullptr || m_left.get() == nullptr)
 	{
 		Group* a = groupsList[0];
 		Group* b = groupsList[1];
 		groupsList.erase(groupsList.begin(), groupsList.begin() + 2);
 
+		std::cout << " " << (*a);
+		m_function->print(std::cout);
+		//std::cout << " " << (*m_function);
+		std::cout << " " << (*b);
+
+
+		std::cout << ")";
 		return m_function->eval(a, b);
 	}
 
 	auto a = m_left->evaluate(groupsList);
+
+	m_function->print(std::cout);
 
 	if (dynamic_cast<Composite*>(m_function))
 	{
@@ -114,6 +125,8 @@ std::unique_ptr<Group> FunctionNode::evaluate(std::vector<Group*>& groupsList)
 	//else continue as usual
 
 	auto b = m_right->evaluate(groupsList);
+
+	std::cout << ")";
 
 	return m_function->eval(a.get(), b.get());
 }

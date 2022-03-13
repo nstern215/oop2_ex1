@@ -96,7 +96,7 @@ int main()
 
 			auto result = operations[left]->evaluate(groups);
 
-			cout << *(result.get()) << endl;
+			cout << " = " << * (result.get()) << endl;
 
 		}
 	
