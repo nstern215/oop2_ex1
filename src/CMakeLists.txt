@@ -3,5 +3,7 @@
                                   "Intersection.cpp"
                                   "Difference.cpp"
                                   "BaseFunction.cpp"
+                                  "Composite.cpp"
+                                  "Product.cpp"
                                   "Group.cpp"
                                   "FunctionNode.cpp")

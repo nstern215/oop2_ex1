@@ -8,6 +8,7 @@ public:
 	Group(std::vector<int>& data);
 
 	std::vector<int>* getData() const;
+
 private:
 	void readData(int size);
 	void order() const;

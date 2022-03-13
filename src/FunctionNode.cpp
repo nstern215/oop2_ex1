@@ -1,6 +1,8 @@
 #include <ostream>
 #include <iostream>
 
+#include "Union.h"
+#include "Composite.h"
 #include "FunctionNode.h"
 
 FunctionNode::FunctionNode(BaseFunction* function, std::shared_ptr<FunctionNode> left, std::shared_ptr<FunctionNode> right) :
@@ -19,56 +21,72 @@ BaseFunction* FunctionNode::getFunction() const
 	return m_function;
 }
 
-//void FunctionNode::getGroups()
-//{
-//	for (int i = 0; i < m_numOfGroups; i++)
-//	{
-//		int size;
-//
-//		std::cin >> size;
-//		Group group(size);
-//
-//		group.getData();
-//
-//		this->m_groupsForEval.push_back(group);
-//	}
-//}
-
-void FunctionNode::printFunction(std::shared_ptr<FunctionNode> thisFunction, char groupName) const
+void FunctionNode::getGroups(std::vector< Group*> groups)
 {
-	if (m_right == nullptr || m_left == nullptr) 
+	for (int i = 0; i < m_numOfGroups; i++)
 	{
-		std::cout << groupName << " ";
-		std::cout << *thisFunction.get();
+		int size;
+
+		std::cin >> size;
+		Group* group(size);
+
+		group->getData();
+
+		groups.push_back(group);
+	}
+}
+
+void FunctionNode::printFunction(char groupName)
+{
+	if (m_right == nullptr || m_left == nullptr)
+	{
+		std::cout << "(" << groupName << " ";
+		std::cout << *this;
 		groupName++;
-		std::cout << " " << groupName << std::endl;
+		std::cout << " " << groupName << ")" << " ";
 		groupName++;
 
-		thisFunction->m_numOfGroups += 2;
+		m_numOfGroups += 2;
 
 		return;
 	}
 
-	printFunction(thisFunction->m_left, groupName);
-	
-	printFunction(thisFunction->m_right, groupName);
+	m_left->printFunction(groupName);
+
+	std::cout << *this << " ";
+
+	m_right->printFunction(groupName);
 
 	return;
 }
 
-//void FunctionNode::evaluate(std::shared_ptr<FunctionNode> thisFunction, std::vector<Group> groupsList)
-//{
-//	if (m_right == nullptr || m_left == nullptr)
-//	{
-//	
-//	}
-//
-//	evaluate(thisFunction->m_left, groupsList);
-//
-//	evaluate(thisFunction->m_right, groupsList);
-//
-//	return;
-//}
+std::unique_ptr<Group> FunctionNode::evaluate(std::vector<Group*> groupsList)
+{
+	if (m_right == nullptr || m_left == nullptr)
+	{
+		Group* a = groupsList[0];
+		Group* b = groupsList[1];
+		groupsList.erase(groupsList.begin(), groupsList.begin() + 2);
+
+		return m_function->eval(a, b);
+	}
+
+	auto a = m_left->evaluate(groupsList);
+
+	if (dynamic_cast<Composite*>(m_function))
+	{
+		groupsList.insert(groupsList.begin(), a.get());
+		return  m_right->evaluate(groupsList);
+	}
+
+	//todo: if function is hasma then add output to begin of the groupslist
+	// return m_right->evaluate(groupsList);
+	//else continue as usual
+
+	auto b = m_right->evaluate(groupsList);
+
+	return m_function->eval(a.get(), b.get());
+}
 
 std::ostream& operator<<(std::ostream& os, const FunctionNode& other)
 {

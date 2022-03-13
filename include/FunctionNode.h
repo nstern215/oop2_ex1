@@ -11,14 +11,12 @@ public:
 	~FunctionNode();
 
 	BaseFunction* getFunction() const;
-	void getGroups();
-	void printFunction(std::shared_ptr<FunctionNode> thisFunction, char groupName)const;
-	/*void evaluate(std::shared_ptr<FunctionNode> thisFunction, std::vector<Group> groupsList);*/
+	void getGroups(std::vector< Group*> groups);
+	void printFunction(char groupName);
+	std::unique_ptr<Group> evaluate(std::vector<Group*> groupsList);
 
 private:
 	int m_numOfGroups;
-
-	std::vector<Group> m_groupsForEval;
 
 	BaseFunction* m_function;
 	

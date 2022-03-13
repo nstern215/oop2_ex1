@@ -5,6 +5,8 @@
 #include "Difference.h"
 #include "Intersection.h"
 #include "FunctionNode.h"
+#include "Composite.h"
+#include "Product.h"
 
 using std::string;
 
@@ -34,8 +36,9 @@ int main()
 	const auto unionFunc = std::make_unique<Union>();
 	const auto intersectionFunc = std::make_unique<Intersection>();
 	const auto differenceFunc = std::make_unique<Difference>();
-	
-	int right, left;
+
+	const auto compositeFunc = std::make_unique<Composite>();
+	const auto productFunc = std::make_unique<Product>();
 
 	std::vector<std::shared_ptr<FunctionNode>> operations = {
 		std::make_shared<FunctionNode>(unionFunc.get()),
@@ -44,7 +47,9 @@ int main()
 	};
 
 	string command;
-	
+	int right, left;
+
+
 	while (true)
 	{
 		cout << "List of available set of operations:\n" << endl;
@@ -55,11 +60,7 @@ int main()
 
 			cout << i << ".\t";
 
-			operations[i]->printFunction(operations[i],groupName);
-
-			//cout << i << ".\t" << groupName << " " << *(operations[i].get());
-			//groupName ++;
-			//cout << " " << groupName << endl;
+			operations[i]->printFunction(groupName);
 
 			cout << "\n";
 		}
@@ -73,11 +74,35 @@ int main()
 
 		else if (command == "help")
 			cout << help << endl;
+
+		else if (command == "eval")
+		{
+			cin >> left;
+
+			std::vector<Group*> groups;
+
+			operations[left]->getGroups(groups);
+
+			operations[left]->evaluate(groups);
+
+		}
 	
 		else if (command == "uni")
 		{
 			cin >> left >> right;
 			operations.push_back(std::make_shared<FunctionNode>(unionFunc.get(), operations[left], operations[right]));
+		}
+
+		else if (command == "comp")
+		{
+			cin >> left >> right;
+			operations.push_back(std::make_shared<FunctionNode>(compositeFunc.get(), operations[left], operations[right]));
+		}
+
+		else if (command == "prod")
+		{
+			cin >> left >> right;
+			operations.push_back(std::make_shared<FunctionNode>(productFunc.get(), operations[left], operations[right]));
 		}
 
 		else if (command == "inter")
