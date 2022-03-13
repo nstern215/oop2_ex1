@@ -4,6 +4,8 @@
 
 #include "Group.h"
 
+#include <string>
+
 Group::Group(int size) :
 	m_data(std::make_unique<std::vector<int>>())
 {
@@ -47,7 +49,14 @@ void Group::order() const
 std::ostream& operator<<(std::ostream& os, const Group& other)
 {
 	os << "{ ";
-	std::ranges::copy(*(other.getData()), std::ostream_iterator<int>(os, ", "));
-	os << " }";
+
+	std::string dataStr;
+	for (const int i : *(other.getData()))
+		dataStr+= std::to_string(i) + ", ";
+
+	const std::string fixedStr = dataStr.substr(0, dataStr.size() - 2);
+	
+	//std::ranges::copy(*(other.getData()), std::ostream_iterator<int>(os, ", "));
+	os << fixedStr << " }";
 	return os;
 }

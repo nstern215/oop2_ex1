@@ -1,4 +1,5 @@
 #include <ostream>
+#include <iostream>
 #include "Composite.h"
 #include "FunctionNode.h"
 
@@ -52,23 +53,17 @@ std::unique_ptr<Group> FunctionNode::evaluate(std::vector<std::unique_ptr<Group>
 {
 	std::cout << "(";
 
-	if (m_right.get() == nullptr || m_left.get() == nullptr)
+	if (m_right == nullptr || m_left == nullptr)
 	{
-		Group* a = groupsList[0].get();
-		Group* b = groupsList[1].get();
-
-		auto result = m_function->eval(a, b);
-
-		groupsList.erase(groupsList.begin(), groupsList.begin() + 2);
-
-		std::cout << " " << (*a);
+		auto result = m_function->eval(groupsList[0].get(), groupsList[1].get());
+		std::cout << " " << (*groupsList[0]);
 		m_function->print(std::cout);
-		//std::cout << " " << (*m_function);
-		std::cout << " " << (*b);
-
+		std::cout << " " << (*groupsList[1]);
 
 		std::cout << ")";
-		return m_function->eval(a, b);
+
+		groupsList.erase(groupsList.begin(), groupsList.begin() + 2);
+		return result;
 	}
 
 	auto a = m_left->evaluate(groupsList);
