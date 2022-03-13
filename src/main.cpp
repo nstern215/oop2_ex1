@@ -87,13 +87,13 @@ int main()
 
 			const int numOfGroups = operations[left]->getRequiredGroups();
 			
-			std::vector<Group*> groups;
+			std::vector<std::unique_ptr<Group>> groups;
 
 			for (int i = 0; i < numOfGroups; ++i)
 			{
 				int size;
 				cin >> size;
-				groups.push_back(new Group(size));
+				groups.push_back(std::make_unique<Group>(size));
 			}
 
 			auto result = operations[left]->evaluate(groups);

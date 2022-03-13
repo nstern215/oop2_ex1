@@ -8,13 +8,11 @@ class FunctionNode
 {
 public:
 	FunctionNode(BaseFunction* function, std::shared_ptr<FunctionNode> left = nullptr, std::shared_ptr<FunctionNode> right = nullptr);
-	~FunctionNode();
 
 	BaseFunction* getFunction() const;
-	void getGroups(std::vector< Group*> groups);
 	int getRequiredGroups() const;
-	void printFunction(std::ostream& os, char groupName);
-	std::unique_ptr<Group> evaluate(std::vector<Group*>& groupsList) const;
+	void printFunction(std::ostream& os) const;
+	std::unique_ptr<Group> evaluate(std::vector<std::unique_ptr<Group>>& groupsList) const;
 
 private:
 	int m_numOfGroups;

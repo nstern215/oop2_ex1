@@ -10,7 +10,7 @@ public:
 	std::vector<int>* getData() const;
 
 private:
-	void readData(int size);
+	void readData(int size) const;
 	void order() const;
 
 	std::unique_ptr<std::vector<int>> m_data;
