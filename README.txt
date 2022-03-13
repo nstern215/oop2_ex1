@@ -67,7 +67,11 @@ Daniel Yosef, ID 322017518
 	- Vector holding the commands added to the list.
 
 	- Vector holding the list of groups that will be filled in according to the
-	  need of the command that is wanted to be evalueted.
+	  need of the command that is wanted to be evalueted. The way we work with
+	  this vector in the algorithem is that every time we get to a situation 
+	  where right and left are NULL, so we use the first two groups and then 
+	  delete them so that the next two groups will be used for the next part of
+	  the problom.
 
 	-
 7. 

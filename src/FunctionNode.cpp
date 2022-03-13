@@ -1,4 +1,5 @@
 #include <ostream>
+#include <iostream>
 #include "Composite.h"
 #include "FunctionNode.h"
 
