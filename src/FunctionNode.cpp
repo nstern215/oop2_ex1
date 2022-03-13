@@ -57,6 +57,8 @@ void FunctionNode::printFunction(char groupName)
 
 	m_right->printFunction(groupName);
 
+	m_function->eval(resultLeft, resultRight)
+	
 	return;
 }
 

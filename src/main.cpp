@@ -41,9 +41,9 @@ int main()
 	const auto productFunc = std::make_unique<Product>();
 
 	std::vector<std::shared_ptr<FunctionNode>> operations = {
-		std::make_shared<FunctionNode>(unionFunc.get()),
-		std::make_shared<FunctionNode>(intersectionFunc.get()),
-		std::make_shared<FunctionNode>(differenceFunc.get())
+		std::make_shared<FunctionNode>(unionFunc.get(), nullptr, nullptr),
+		std::make_shared<FunctionNode>(intersectionFunc.get(), nullptr, nullptr),
+		std::make_shared<FunctionNode>(differenceFunc.get(), nullptr, nullptr)
 	};
 
 	string command;
@@ -69,6 +69,8 @@ int main()
 
 		cin >> command;
 
+		pos = command.find(" ");
+		
 		if (command == "exit")
 			break;
 
