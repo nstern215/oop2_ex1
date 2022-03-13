@@ -51,20 +51,20 @@ int FunctionNode::getRequiredGroups() const
 
 void FunctionNode::printFunction(std::ostream& os, char groupName)
 {
-	os << "( ";
+	os << "(";
 
 	if (m_left != nullptr)
-		os << *m_left;
+		os << " " << *m_left << " ";
 
 	if (m_left == nullptr)
-		os << "A";
+		os << " A ";
 	m_function->print(os);
 
 	if (m_right == nullptr)
-		os << "B";
+		os << " B ";
 
 	if (m_right != nullptr)
-		os << *m_right;
+		os << " " << *m_right << " ";
 
 	/*if (m_right == nullptr || m_left == nullptr)
 	{
@@ -85,7 +85,7 @@ void FunctionNode::printFunction(std::ostream& os, char groupName)
 
 	m_right->printFunction(groupName);*/
 
-	os << ") ";
+	os << ")";
 
 	//m_function->eval(resultLeft, resultRight)
 }
