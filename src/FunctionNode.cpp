@@ -90,9 +90,9 @@ void FunctionNode::printFunction(std::ostream& os, char groupName)
 	//m_function->eval(resultLeft, resultRight)
 }
 
-std::unique_ptr<Group> FunctionNode::evaluate(std::vector<Group*>& groupsList)
+std::unique_ptr<Group> FunctionNode::evaluate(std::vector<Group*>& groupsList) const
 {
-	if (m_right.get() == nullptr || m_left.get() == nullptr)
+	if (m_right == nullptr || m_left == nullptr)
 	{
 		Group* a = groupsList[0];
 		Group* b = groupsList[1];
@@ -108,10 +108,6 @@ std::unique_ptr<Group> FunctionNode::evaluate(std::vector<Group*>& groupsList)
 		groupsList.insert(groupsList.begin(), a.get());
 		return  m_right->evaluate(groupsList);
 	}
-
-	//todo: if function is hasma then add output to begin of the groupslist
-	// return m_right->evaluate(groupsList);
-	//else continue as usual
 
 	auto b = m_right->evaluate(groupsList);
 

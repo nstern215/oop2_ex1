@@ -14,7 +14,7 @@ public:
 	void getGroups(std::vector< Group*> groups);
 	int getRequiredGroups() const;
 	void printFunction(std::ostream& os, char groupName);
-	std::unique_ptr<Group> evaluate(std::vector<Group*>& groupsList);
+	std::unique_ptr<Group> evaluate(std::vector<Group*>& groupsList) const;
 
 private:
 	int m_numOfGroups;
