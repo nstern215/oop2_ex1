@@ -1,7 +1,4 @@
 #include <ostream>
-#include <iostream>
-
-#include "Union.h"
 #include "Composite.h"
 #include "FunctionNode.h"
 
@@ -13,27 +10,9 @@ FunctionNode::FunctionNode(BaseFunction* function, std::shared_ptr<FunctionNode>
 	m_numOfGroups = 0;
 }
 
-FunctionNode::~FunctionNode()
-{}
-
 BaseFunction* FunctionNode::getFunction() const
 {
 	return m_function;
-}
-
-void FunctionNode::getGroups(std::vector<Group*> groups)
-{
-	for (int i = 0; i < m_numOfGroups; i++)
-	{
-		int size;
-
-		std::cin >> size;
-		/*Group* group(size);
-
-		group->getData();
-
-		groups.push_back(group);*/
-	}
 }
 
 int FunctionNode::getRequiredGroups() const
@@ -49,7 +28,7 @@ int FunctionNode::getRequiredGroups() const
 	return sum;
 }
 
-void FunctionNode::printFunction(std::ostream& os, char groupName)
+void FunctionNode::printFunction(std::ostream& os) const
 {
 	os << "(";
 
@@ -66,38 +45,20 @@ void FunctionNode::printFunction(std::ostream& os, char groupName)
 	if (m_right != nullptr)
 		os << " " << *m_right << " ";
 
-	/*if (m_right == nullptr || m_left == nullptr)
-	{
-		std::cout << "(" << groupName << " ";
-		std::cout << *this;
-		groupName++;
-		std::cout << " " << groupName << ")" << " ";
-		groupName++;
-
-		m_numOfGroups += 2;
-
-		return;
-	}*/
-
-	/*m_left->printFunction(groupName);
-
-	std::cout << *this << " ";
-
-	m_right->printFunction(groupName);*/
-
 	os << ")";
-
-	//m_function->eval(resultLeft, resultRight)
 }
 
-std::unique_ptr<Group> FunctionNode::evaluate(std::vector<Group*>& groupsList)
+std::unique_ptr<Group> FunctionNode::evaluate(std::vector<std::unique_ptr<Group>>& groupsList) const
 {
 	std::cout << "(";
 
 	if (m_right.get() == nullptr || m_left.get() == nullptr)
 	{
-		Group* a = groupsList[0];
-		Group* b = groupsList[1];
+		Group* a = groupsList[0].get();
+		Group* b = groupsList[1].get();
+
+		auto result = m_function->eval(a, b);
+
 		groupsList.erase(groupsList.begin(), groupsList.begin() + 2);
 
 		std::cout << " " << (*a);
@@ -116,13 +77,9 @@ std::unique_ptr<Group> FunctionNode::evaluate(std::vector<Group*>& groupsList)
 
 	if (dynamic_cast<Composite*>(m_function))
 	{
-		groupsList.insert(groupsList.begin(), a.get());
+		groupsList.insert(groupsList.begin(), std::make_unique<Group>(*(a->getData())));
 		return  m_right->evaluate(groupsList);
 	}
-
-	//todo: if function is hasma then add output to begin of the groupslist
-	// return m_right->evaluate(groupsList);
-	//else continue as usual
 
 	auto b = m_right->evaluate(groupsList);
 
@@ -133,7 +90,6 @@ std::unique_ptr<Group> FunctionNode::evaluate(std::vector<Group*>& groupsList)
 
 std::ostream& operator<<(std::ostream& os, FunctionNode& other)
 {
-	other.printFunction(os, 65);
-	//other.getFunction()->print(os);
+	other.printFunction(os);
 	return os;
 }

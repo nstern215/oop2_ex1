@@ -59,11 +59,7 @@ int main()
 			char groupName = 65;
 
 			cout << i << ".\t";
-
-			//operations[i]->printFunction(groupName);
 			cout << *(operations[i]) << endl;
-
-			cout << "\n";
 		}
 
 		cout << "Enter command ('help' for the list of available commands): ";
@@ -71,7 +67,10 @@ int main()
 		cin >> command;
 		
 		if (command == "exit")
+		{
+			cout << "Goodbye!" << endl;
 			break;
+		}
 
 		if (command == "help")
 			cout << help << endl;
@@ -80,19 +79,22 @@ int main()
 		{
 			cin >> left;
 
+			if (operations.size() < left)
+			{
+				cout << "Operation #" << left << " doesn't exist" << endl;
+				continue;
+			}
+
 			const int numOfGroups = operations[left]->getRequiredGroups();
 			
-			std::vector<Group*> groups;
+			std::vector<std::unique_ptr<Group>> groups;
 
 			for (int i = 0; i < numOfGroups; ++i)
 			{
 				int size;
 				cin >> size;
-				groups.push_back(new Group(size));
+				groups.push_back(std::make_unique<Group>(size));
 			}
-			
-
-			//operations[left]->getGroups(groups);
 
 			auto result = operations[left]->evaluate(groups);
 

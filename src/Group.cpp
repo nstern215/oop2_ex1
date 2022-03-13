@@ -4,26 +4,25 @@
 
 #include "Group.h"
 
-Group::Group(int size):
+Group::Group(int size) :
 	m_data(std::make_unique<std::vector<int>>())
 {
 	readData(size);
 }
 
-//todo use pointer for the vector
-Group::Group(std::vector<int>& data):
+Group::Group(std::vector<int>& data) :
 	m_data(std::make_unique<std::vector<int>>())
 {
 	for (const auto i : data)
 		m_data->push_back(i);
-	
+
 	order();
 }
 
-void Group::readData(int size)
+void Group::readData(int size) const
 {
 	int num;
-	
+
 	for (int i = 0; i < size; ++i)
 	{
 		std::cin >> num;
